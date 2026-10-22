@@ -5,11 +5,11 @@ export default function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    first_name: "",
+    last_name: "",
     email: "",
     password: "",
-    confirmPassword: "",
+    confirm_password: "",
   });
   const submitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -18,7 +18,7 @@ export default function Signup() {
   const submitForm = async (event: React.SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError("");
-    if (formData.password !== formData.confirmPassword) {
+    if (formData.password !== formData.confirm_password) {
       setError("Passwords do not match");
       return;
     }
@@ -28,8 +28,8 @@ export default function Signup() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
+          first_name: formData.first_name,
+          last_name: formData.last_name,
           email: formData.email,
           password: formData.password,
         }),
@@ -38,6 +38,8 @@ export default function Signup() {
         setError("Failed to create account");
         return;
       }
+      const data = await res.json()
+      console.log(data)
       navigate("/signin");
     } catch (error) {
       if (error instanceof Error) {
@@ -69,8 +71,8 @@ export default function Signup() {
             <input
               id="firstName"
               type="text"
-              name="firstName"
-              value={formData.firstName}
+              name="first_name"
+              value={formData.first_name}
               onChange={submitChange}
               required
               className="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-white focus:border-blue-500 focus:outline-none"
@@ -86,8 +88,8 @@ export default function Signup() {
             <input
               id="lastName"
               type="text"
-              name="lastName"
-              value={formData.lastName}
+              name="last_name"
+              value={formData.last_name}
               onChange={submitChange}
               required
               className="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-white focus:border-blue-500 focus:outline-none"
@@ -139,8 +141,8 @@ export default function Signup() {
           <input
             id="confirmPassword"
             type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
+            name="confirm_password"
+            value={formData.confirm_password}
             onChange={submitChange}
             required
             className="w-full rounded-md border border-slate-600 bg-slate-900 px-3 py-2 text-white focus:border-blue-500 focus:outline-none"
