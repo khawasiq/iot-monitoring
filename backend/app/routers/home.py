@@ -13,3 +13,10 @@ def register_home(data: CreateLocation):
     }
     homes.append(new_home)
     return new_home
+@router.get("/homes/{user_id}")
+def get_homes(user_id: int):
+    user_homes = []
+    for home in homes:
+        if home["user_id"] == user_id:
+            user_homes.append(home)
+    return user_homes;
