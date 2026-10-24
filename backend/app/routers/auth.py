@@ -31,3 +31,14 @@ def signin(signin_request: Signin):
                 }
             break
     raise HTTPException(status_code=401, detail="Invalid email or password")
+@router.get("/users/user_id")
+def get_user(user_id: int):
+    for user in users:
+        if user["id"] == user_id:
+            return {
+                "id": user["id"],
+                "first_name": user["first_name"],
+                "last_name": user["last_name"],
+                "email": user["email"]
+            }
+    raise HTTPException(status_code="404", detail="user not found")
