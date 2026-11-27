@@ -1,3 +1,4 @@
+#wasiq@ACCER MINGW64 C:/Users/wasiq/dev/IoT-Node-Watcher (master)
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import auth, home
